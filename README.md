@@ -33,13 +33,13 @@ O modulo kafka tem como objetivo abstrair feature do Spring-kafka e facilitar o 
     @Value("${config.kafka.group-id}")
     private String groupID;
 ```
-Em seu application.properties do micro-service
+#### Em seu application.properties do micro-service
 ```properties
     config.kafka.bootstrap-servers=localhost:9092
     config.kafka.group-id=myGroup
 ```
 
-### Exemplo de como escrever um topico
+#### Exemplo de como escrever um topico.
 ```java
     @Log
     @Service
@@ -58,7 +58,7 @@ Em seu application.properties do micro-service
     }
 ```
 
-### Exemplo de como ler um topico
+#### Exemplo de como ler um topico.
 ```java
     @Log
     @Service
