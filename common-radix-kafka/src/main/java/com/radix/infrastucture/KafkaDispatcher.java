@@ -4,6 +4,8 @@ import lombok.extern.java.Log;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Component;
 
+import java.util.Objects;
+
 @Log
 @Component
 public class KafkaDispatcher<T> {
@@ -15,7 +17,12 @@ public class KafkaDispatcher<T> {
     }
 
     public void send(String topic, String key, CorrelationId correlationId, T payLoad) {
-        var message = new Message<>(correlationId.continueWith("_" + topic), payLoad);
+
+        if (Objects.nonNull(correlationId)) {
+            correlationId.continueWith("_" + topic);
+        }
+
+        Message message = new Message<T>(correlationId, payLoad);
 
         log.info(String.format("Sending : %s", message));
         log.info("--------------------------------");
