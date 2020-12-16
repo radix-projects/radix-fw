@@ -50,6 +50,8 @@ O modulo kafka tem como objetivo abstrair feature Spring-kafka e facilitar o des
 
     }
 
+[Para mais detalhes segue documentação](https://spring.io/projects/spring-kafka)
+
 
 
 
