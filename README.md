@@ -13,13 +13,34 @@
 * Redis
 
 
-## Modulos
+## Dowlonad do Radix Fw
+```bash
+  $ git clone git@github.com:radix-projects/radix-fw.git
+  $ cd radix-fw
+  $ mvn clean install
+```
 
+## Modulos:
 ### Kafka
-O modulo kafka tem como objetivo abstrair feature Spring-kafka e facilitar o desenvolvimento de mensageria.
+O modulo kafka tem como objetivo abstrair feature do Spring-kafka e facilitar o uso.
+
+### Pequena configuracao 
+#### Adicionar no seu application.properties do seu projeto refrencias do bootstrapServers e groupID que se encontram no KafkaProducerConfig e KafkaConsumerConfig.
+```java
+    @Value("${config.kafka.bootstrap-servers}")
+    private String bootstrapServers;
+
+    @Value("${config.kafka.group-id}")
+    private String groupID;
+```
+Em seu application.properties do micro-service
+```properties
+    config.kafka.bootstrap-servers=localhost:9092
+    config.kafka.group-id=myGroup
+```
 
 ### Exemplo de como escrever um topico
-
+```java
     @Log
     @Service
     public class MyService {
@@ -35,9 +56,10 @@ O modulo kafka tem como objetivo abstrair feature Spring-kafka e facilitar o des
         }
 
     }
+```
 
 ### Exemplo de como ler um topico
- 
+```java
     @Log
     @Service
     public class MyService {
@@ -45,10 +67,11 @@ O modulo kafka tem como objetivo abstrair feature Spring-kafka e facilitar o des
         @KafkaListener(topics = "TOPIC_NEW_SERVICE")
         void listener(Message message) {
             log.info(String.format("Listener %s", message));
-            ....
+            //....
         }
 
     }
+```
 
 [Para mais detalhes segue documentação](https://spring.io/projects/spring-kafka)
 
