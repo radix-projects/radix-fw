@@ -42,7 +42,7 @@ O modulo kafka tem como objetivo abstrair feature Spring-kafka e facilitar o des
     @Service
     public class MyService {
 
-        @KafkaListener(topics = "TOPIC_NEW_USER")
+        @KafkaListener(topics = "TOPIC_NEW_SERVICE")
         void listener(Message message) {
             log.info(String.format("Listener %s", message));
             ....
