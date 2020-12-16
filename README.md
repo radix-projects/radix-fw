@@ -8,6 +8,9 @@
 * New Relic
 * Docker 
 * Kubernetes
+* Oracle
+* Mongo
+* Redis
 
 
 
