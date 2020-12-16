@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project version="4">
-  <component name="ProjectModuleManager">
-    <modules>
-      <module fileurl="file://$PROJECT_DIR$/radix-fw/common-radix-kafka/common-radix-kafka.iml" filepath="$PROJECT_DIR$/radix-fw/common-radix-kafka/common-radix-kafka.iml" />
-      <module fileurl="file://$PROJECT_DIR$/radix-fw/radix-fw.iml" filepath="$PROJECT_DIR$/radix-fw/radix-fw.iml" />
-    </modules>
-  </component>
-</project>
