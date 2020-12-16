@@ -25,7 +25,7 @@
 O modulo kafka tem como objetivo abstrair feature do Spring-kafka e facilitar o uso.
 
 ### Pequena configuracao 
-#### Adicionar no seu application.properties do seu projeto refrencias do bootstrapServers e groupID que se encontram no KafkaProducerConfig e KafkaConsumerConfig.
+#### Adicionar no seu application.properties do seu micro-service referências do bootstrapServers e groupID que se encontram no KafkaProducerConfig e KafkaConsumerConfig.
 ```java
     @Value("${config.kafka.bootstrap-servers}")
     private String bootstrapServers;
