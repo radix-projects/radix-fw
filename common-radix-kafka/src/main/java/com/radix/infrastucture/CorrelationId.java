@@ -1,12 +1,10 @@
 package com.radix.infrastucture;
 
-import lombok.Getter;
-import lombok.extern.java.Log;
-
 import java.util.UUID;
 
+import lombok.Getter;
+
 @Getter
-@Log
 public class CorrelationId {
 
     private final String id;

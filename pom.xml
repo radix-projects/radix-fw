@@ -19,6 +19,7 @@
 
 	<modules>
 		<module>common-radix-kafka</module>
+		<module>common-radix-new-relic</module>
 	</modules>
 
 	<properties>
@@ -34,6 +35,11 @@
 			<dependency>
 				<groupId>com.radix</groupId>
 				<artifactId>common-radix-kafka</artifactId>
+			</dependency>
+
+			<dependency>
+				<groupId>br.com.radixeng</groupId>
+				<artifactId>common-radix-new-relic</artifactId>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>

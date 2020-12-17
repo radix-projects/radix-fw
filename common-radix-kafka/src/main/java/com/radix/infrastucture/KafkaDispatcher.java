@@ -22,7 +22,7 @@ public class KafkaDispatcher<T> {
             correlationId.continueWith("_" + topic);
         }
 
-        Message message = new Message<T>(correlationId, payLoad);
+        Message<T> message = new Message<>(correlationId, payLoad);
 
         log.info(String.format("Sending : %s", message));
         log.info("--------------------------------");

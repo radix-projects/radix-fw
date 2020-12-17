@@ -75,6 +75,13 @@ O modulo kafka tem como objetivo abstrair feature do Spring-kafka e facilitar o 
 
 [Para mais detalhes segue documentação](https://spring.io/projects/spring-kafka)
 
+### New Relic
+
+Para utilizar o New Relic deve-se seguir o passo a passo disponível na documentação do 
+[New Relic](https://docs.newrelic.com/docs/logs/enable-log-management-new-relic/logs-context-java/java-configure-javautillogging)
+
+- Para fazer o cadastro gratuito no [site](https://newrelic.com/signup).
+- Adicionar o arquivo newrelic.yml gerado no site com seu cadastro no diretório ./common-radix-new-relic/newrelic.yml
 
 
 
