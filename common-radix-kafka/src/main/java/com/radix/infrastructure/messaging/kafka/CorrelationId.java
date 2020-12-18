@@ -1,4 +1,4 @@
-package com.radix.infrastucture;
+package com.radix.infrastructure.messaging.kafka;
 
 import lombok.Getter;
 import lombok.extern.java.Log;

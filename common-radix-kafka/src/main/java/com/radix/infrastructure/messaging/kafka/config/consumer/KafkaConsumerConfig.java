@@ -1,4 +1,4 @@
-package com.radix.infrastucture.config.consumer;
+package com.radix.infrastructure.messaging.kafka.config.consumer;
 
 
 import org.apache.kafka.clients.consumer.ConsumerConfig;
