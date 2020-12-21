@@ -50,7 +50,9 @@ Necessario habilitar o Kafka em sua aplicacao:
         }
    }
 ```
+
 Em seguidda usar KafkaDispatcher, escrever em um especifico topico.
+
 ```java
     @Log
     @Service
@@ -83,7 +85,9 @@ Necessário importar KafkaConsumerConfig e habilitar o Kafka em sua aplicacao:
         }
    }
 ```
-Em seguidda usar a notacao @KafkaListener passando o topico
+
+Em seguidda usar a notacao @KafkaListener passando o topico.
+
 ```java
     @Log
     @Service
@@ -102,8 +106,8 @@ Em seguidda usar a notacao @KafkaListener passando o topico
 
 ### MongoDB
 O modulo MongoDb tem como objetivo abstrair feature do spring-boot-starter-data-mongodb e facilitar o uso.
+Habilite em seu projeto @EnableMongoRepositories passando no basePackages como padrao "com.radix.infrastructure.persistence.mongo".
 
-Habilite em seu projeto @EnableMongoRepositories passando no basePackages como padrao "com.radix.infrastructure.persistence.mongo"
 ```java
   @EnableMongoRepositories(basePackages = {"com.radix.infrastructure.persistence.mongo"})
   @SpringBootApplication(scanBasePackages = "com.radix")
@@ -113,7 +117,8 @@ Habilite em seu projeto @EnableMongoRepositories passando no basePackages como p
         }
    }
 ```
-Crie o seu entity neste diretorio "com.radix.infrastructure.persistence.mongo.myentity"
+Crie o seu entity neste diretorio "com.radix.infrastructure.persistence.mongo.myentity".
+
 ```java
     package com.radix.infrastructure.persistence.mongo.venda;
 
@@ -130,7 +135,8 @@ Crie o seu entity neste diretorio "com.radix.infrastructure.persistence.mongo.my
         //getter and setter ...
     }
 ```
-Crie no mesmo diretorio "com.radix.infrastructure.persistence.mongo.myentity" o repository referente ao seu entity 
+Crie no mesmo diretorio "com.radix.infrastructure.persistence.mongo.myentity" o repository referente ao seu entity.
+
 ```java
     package com.radix.infrastructure.persistence.mongo.venda;
     
@@ -146,7 +152,7 @@ Crie no mesmo diretorio "com.radix.infrastructure.persistence.mongo.myentity" o 
     
     }
 ```
-Note que na interface MyEntityRepository esta habilitado o queryDsl passando o pojo QuerydslPredicateExecutor<MyEntity>, para Habilitar adicione em seu arquivo pom.xml este plugin
+Note que na interface MyEntityRepository esta habilitado o queryDsl passando o pojo QuerydslPredicateExecutor<MyEntity>, para Habilitar adicione em seu arquivo pom.xml este plugin.
 ```xml
     <build>
         <plugins>
@@ -156,6 +162,24 @@ Note que na interface MyEntityRepository esta habilitado o queryDsl passando o p
             </plugin>
         </plugins>
     </build>
+```
+
+Agora so subir o servidor e testar, na framework radix-fw/docker-compose.yml adicionamos a imagem do mongodb. Apenas rode os comandos abaixo.
+
+```yml
+    mongo:
+    image: mongo
+    networks:
+    - network-net
+    environment:
+    MONGO_INITDB_ROOT_USERNAME: root
+    MONGO_INITDB_ROOT_PASSWORD: MongoDB2021!
+    ports:
+    - "27017:27017"
+```
+```bash
+    $ docker-compose down
+    $ docker-compose up -d
 ```
 
 * [Para mais detalhes segue documentação](https://spring.io/projects/spring-data-mongodb)
