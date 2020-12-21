@@ -121,8 +121,10 @@ Crie o seu entity neste diretorio "com.radix.infrastructure.persistence.mongo.my
 
     @Document(value = "myentitys")
     public class MyEntity {
-       
-        private String client;
+
+        @Id
+        private String id;
+        private Long client;
         private String state;
 
         //getter and setter ...
@@ -137,7 +139,7 @@ Crie no mesmo diretorio "com.radix.infrastructure.persistence.mongo.myentity" o 
     public interface MyEntityRepository extends MongoRepository<MyEntity, String>, QuerydslPredicateExecutor<MyEntity> {
     
         @Query("{ 'client' : ?0 }")
-        VendaEntity findUsersByCliente(String client);
+        VendaEntity findUsersByCliente(Long client);
     
         @Query("{ 'state' : ?0 }")
         List<VendaEntity> findUsersByStatus(String state);
