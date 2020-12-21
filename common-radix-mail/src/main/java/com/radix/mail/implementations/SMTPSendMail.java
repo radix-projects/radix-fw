@@ -21,6 +21,10 @@ public class SMTPSendMail implements ISendMailProvider {
     @Async
     public void sendMail(Email email) {
         //TODO: Send mail with SMTP provider
+        log.info("-------------------------");
         log.info("Email supposed sent...");
+        log.info(email.toString());
+        log.info("-------------------------");
     }
 }
+
