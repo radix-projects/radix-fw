@@ -98,7 +98,7 @@ Em seguidda usar a notacao @KafkaListener passando o topico
     }
 ```
 
-[Para mais detalhes segue documentação](https://spring.io/projects/spring-kafka)
+* [Para mais detalhes segue documentação](https://spring.io/projects/spring-kafka)
 
 ### MongoDB
 O modulo MongoDb tem como objetivo abstrair feature do spring-boot-starter-data-mongodb e facilitar o uso.
@@ -157,3 +157,6 @@ Note que na interface MyEntityRepository esta habilitado o queryDsl passando o p
         </plugins>
     </build>
 ```
+
+* [Para mais detalhes segue documentação](https://spring.io/projects/spring-data-mongodb)
+* [Segue documentação sobre QueryDsl](http://www.querydsl.com/) 
