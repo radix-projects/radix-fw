@@ -164,7 +164,7 @@ Note que na interface MyEntityRepository esta habilitado o queryDsl passando o p
     </build>
 ```
 
-Agora so subir o servidor e testar, na framework radix-fw/docker-compose.yml adicionamos a imagem do mongodb. Apenas rode os comandos abaixo.
+Suba o servidor do mongodb, no diretorio radix-fw/docker-compose.yml adicionamos a imagem do mongodb. Apenas rode os comandos abaixo.
 
 ```yml
     mongo:
