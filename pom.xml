@@ -19,7 +19,8 @@
 
 	<modules>
 		<module>common-radix-kafka</module>
-	</modules>
+        <module>common-radix-mail</module>
+    </modules>
 
 	<properties>
 		<java.version>11</java.version>
@@ -34,6 +35,10 @@
 			<dependency>
 				<groupId>com.radix</groupId>
 				<artifactId>common-radix-kafka</artifactId>
+			</dependency>
+			<dependency>
+				<groupId>com.radix</groupId>
+				<artifactId>common-radix-mail</artifactId>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
