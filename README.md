@@ -39,7 +39,20 @@ O modulo kafka tem como objetivo abstrair feature do Spring-kafka e facilitar o 
     config.kafka.group-id=myGroup
 ```
 
-#### Exemplo de como escrever um topico.
+### Exemplo de como escrever um topico.
+#### Necessario habilitar o Kafka em sua aplicacao:
+
+```java
+   @EnableKafka
+   @SpringBootApplication(scanBasePackages = "com.radix")
+   public class ProcessaVendasApplication {
+    
+        public static void main(String[] args) {
+            SpringApplication.run(ProcessaVendasApplication.class, args);
+        }
+   }
+```
+#### Em seguidda usar KafkaDispatcher escrever em um topico.
 ```java
     @Log
     @Service
