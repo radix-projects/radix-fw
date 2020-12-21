@@ -1,4 +1,4 @@
-package com.radix.infrastucture.config.producer;
+package com.radix.infrastructure.messaging.kafka.config.producer;
 
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;
@@ -12,6 +12,7 @@ import org.springframework.messaging.Message;
 
 import java.util.HashMap;
 import java.util.Map;
+
 
 @Configuration
 public class KafkaProducerConfig<T> {
@@ -38,5 +39,6 @@ public class KafkaProducerConfig<T> {
     public KafkaTemplate<String, Message<T>> kafkaTemplate() {
         return new KafkaTemplate<>(producerFactory());
     }
+
 
 }

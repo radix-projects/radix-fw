@@ -1,9 +1,9 @@
-package com.radix.infrastucture.config.producer;
+package com.radix.infrastructure.messaging.kafka.config.producer;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.radix.infrastucture.Message;
-import com.radix.infrastucture.MessageAdapater;
+import com.radix.infrastructure.messaging.kafka.Message;
+import com.radix.infrastructure.messaging.kafka.MessageAdapater;
 import org.apache.kafka.common.serialization.Serializer;
 
 public class GsonSerializer<T> implements Serializer<T> {

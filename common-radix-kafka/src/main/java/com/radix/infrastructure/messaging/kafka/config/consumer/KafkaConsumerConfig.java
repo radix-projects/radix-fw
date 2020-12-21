@@ -1,4 +1,4 @@
-package com.radix.infrastucture.config.consumer;
+package com.radix.infrastructure.messaging.kafka.config.consumer;
 
 
 import org.apache.kafka.clients.consumer.ConsumerConfig;
@@ -42,7 +42,7 @@ public class KafkaConsumerConfig<T> {
         props.put(ConsumerConfig.GROUP_ID_CONFIG, groupID);
         //props.put(ConsumerConfig.CLIENT_ID_CONFIG, UUID.randomUUID().toString());
         props.put(ConsumerConfig.MAX_POLL_RECORDS_CONFIG, "1");
-        props.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest"); // earliest - latest
+        props.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "latest"); // earliest - latest
         return props;
     }
 

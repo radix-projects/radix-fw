@@ -1,5 +1,6 @@
-package com.radix.infrastucture;
+package com.radix.infrastructure.messaging.kafka;
 
+import com.radix.infrastructure.messaging.kafka.config.producer.KafkaProducerConfig;
 import lombok.extern.java.Log;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Component;
@@ -10,13 +11,15 @@ import java.util.Objects;
 @Component
 public class KafkaDispatcher<T> {
 
-    private final KafkaTemplate<String, Message<T>> kafkaTemplate;
+    private final KafkaProducerConfig kafkaProducerConfig;
 
-    public KafkaDispatcher(KafkaTemplate<String, Message<T>> kafkaTemplate) {
-        this.kafkaTemplate = kafkaTemplate;
+    public KafkaDispatcher(KafkaProducerConfig kafkaProducerConfig) {
+        this.kafkaProducerConfig = kafkaProducerConfig;
     }
 
     public void send(String topic, String key, CorrelationId correlationId, T payLoad) {
+
+        var kafkaTemplate = kafkaTemplate();
 
         if (Objects.nonNull(correlationId)) {
             correlationId.continueWith("_" + topic);
@@ -28,6 +31,11 @@ public class KafkaDispatcher<T> {
         log.info("--------------------------------");
 
         kafkaTemplate.send(topic, key, message);
+        kafkaTemplate.flush();
+    }
+
+    private KafkaTemplate<String, Message<T>> kafkaTemplate() {
+        return kafkaProducerConfig.kafkaTemplate();
     }
 
 }
