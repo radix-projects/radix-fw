@@ -58,7 +58,21 @@ O modulo kafka tem como objetivo abstrair feature do Spring-kafka e facilitar o 
     }
 ```
 
-#### Exemplo de como ler um topico.
+### Exemplo de como ler um topico.
+#### Necessario importar KafkaConsumerConfig e habilitar o Kafka em sua aplicacao:
+
+```java
+   @Import(KafkaConsumerConfig.class)
+   @EnableKafka
+   @SpringBootApplication(scanBasePackages = "com.radix")
+   public class ProcessaVendasApplication {
+    
+        public static void main(String[] args) {
+            SpringApplication.run(ProcessaVendasApplication.class, args);
+        }
+   }
+```
+#### Em seguidda usar a notacao @KafkaListener passando o topico
 ```java
     @Log
     @Service
