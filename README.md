@@ -52,7 +52,7 @@ O modulo kafka tem como objetivo abstrair feature do Spring-kafka e facilitar o 
         }
    }
 ```
-#### Em seguidda usar KafkaDispatcher escrever em um topico.
+#### Em seguidda usar KafkaDispatcher, escrever em um especifico topico.
 ```java
     @Log
     @Service
@@ -72,7 +72,7 @@ O modulo kafka tem como objetivo abstrair feature do Spring-kafka e facilitar o 
 ```
 
 ### Exemplo de como ler um topico.
-#### Necessario importar KafkaConsumerConfig e habilitar o Kafka em sua aplicacao:
+#### Necessário importar KafkaConsumerConfig e habilitar o Kafka em sua aplicacao:
 
 ```java
    @Import(KafkaConsumerConfig.class)
