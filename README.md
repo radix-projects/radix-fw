@@ -23,9 +23,7 @@
 ## Modulos:
 ### Kafka
 O modulo kafka tem como objetivo abstrair feature do Spring-kafka e facilitar o uso.
-
-### Pequena configuracao 
-#### Adicionar no seu application.properties do seu micro-service referências do bootstrapServers e groupID que se encontram no KafkaProducerConfig e KafkaConsumerConfig.
+Adicionar no seu application.properties do seu micro-service referências do bootstrapServers e groupID que se encontram no KafkaProducerConfig e KafkaConsumerConfig.
 ```java
     @Value("${config.kafka.bootstrap-servers}")
     private String bootstrapServers;
@@ -33,14 +31,14 @@ O modulo kafka tem como objetivo abstrair feature do Spring-kafka e facilitar o 
     @Value("${config.kafka.group-id}")
     private String groupID;
 ```
-#### Em seu application.properties do micro-service
+Em seu application.properties do micro-service
 ```properties
     config.kafka.bootstrap-servers=localhost:9092
     config.kafka.group-id=myGroup
 ```
 
-### Exemplo de como escrever um topico.
-#### Necessario habilitar o Kafka em sua aplicacao:
+Exemplo de como escrever um topico.
+Necessario habilitar o Kafka em sua aplicacao:
 
 ```java
    @EnableKafka
@@ -52,7 +50,7 @@ O modulo kafka tem como objetivo abstrair feature do Spring-kafka e facilitar o 
         }
    }
 ```
-#### Em seguidda usar KafkaDispatcher, escrever em um especifico topico.
+Em seguidda usar KafkaDispatcher, escrever em um especifico topico.
 ```java
     @Log
     @Service
@@ -71,8 +69,8 @@ O modulo kafka tem como objetivo abstrair feature do Spring-kafka e facilitar o 
     }
 ```
 
-### Exemplo de como ler um topico.
-#### Necessário importar KafkaConsumerConfig e habilitar o Kafka em sua aplicacao:
+Exemplo de como ler um topico.
+Necessário importar KafkaConsumerConfig e habilitar o Kafka em sua aplicacao:
 
 ```java
    @Import(KafkaConsumerConfig.class)
@@ -85,7 +83,7 @@ O modulo kafka tem como objetivo abstrair feature do Spring-kafka e facilitar o 
         }
    }
 ```
-#### Em seguidda usar a notacao @KafkaListener passando o topico
+Em seguidda usar a notacao @KafkaListener passando o topico
 ```java
     @Log
     @Service
@@ -102,7 +100,58 @@ O modulo kafka tem como objetivo abstrair feature do Spring-kafka e facilitar o 
 
 [Para mais detalhes segue documentação](https://spring.io/projects/spring-kafka)
 
+### MongoDB
+O modulo MongoDb tem como objetivo abstrair feature do spring-boot-starter-data-mongodb e facilitar o uso.
 
+Habilite em seu projeto @EnableMongoRepositories passando no basePackages como padrao "com.radix.infrastructure.persistence.mongo"
+```java
+  @EnableMongoRepositories(basePackages = {"com.radix.infrastructure.persistence.mongo"})
+  @SpringBootApplication(scanBasePackages = "com.radix")
+   public class ProcessaVendasApplication {
+        public static void main(String[] args) {
+            SpringApplication.run(ProcessaVendasApplication.class, args);
+        }
+   }
+```
+Crie o seu entity neste diretorio "com.radix.infrastructure.persistence.mongo.myentity"
+```java
+    package com.radix.infrastructure.persistence.mongo.venda;
 
+    //...
 
+    @Document(value = "myentitys")
+    public class MyEntity {
+       
+        private String client;
+        private String state;
 
+        //getter and setter ...
+    }
+```
+Crie no mesmo diretorio "com.radix.infrastructure.persistence.mongo.myentity" o repository referente ao seu entity 
+```java
+    package com.radix.infrastructure.persistence.mongo.venda;
+    
+    //...
+    
+    public interface MyEntityRepository extends MongoRepository<MyEntity, String>, QuerydslPredicateExecutor<MyEntity> {
+    
+        @Query("{ 'client' : ?0 }")
+        VendaEntity findUsersByCliente(String client);
+    
+        @Query("{ 'state' : ?0 }")
+        List<VendaEntity> findUsersByStatus(String state);
+    
+    }
+```
+Note que na interface MyEntityRepository esta habilitado o queryDsl passando o pojo QuerydslPredicateExecutor<MyEntity>, para Habilitar adicione em seu arquivo pom.xml este plugin
+```xml
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>com.mysema.maven</groupId>
+                <artifactId>apt-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+```
