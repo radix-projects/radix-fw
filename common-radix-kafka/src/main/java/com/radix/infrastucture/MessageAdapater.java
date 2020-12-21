@@ -27,7 +27,7 @@ public class MessageAdapater implements JsonSerializer<Message>, JsonDeserialize
 
         try {
             // maybe you want to use a "accept list"
-            var payLoad = context.deserialize(obj.get("payLoad"), Class.forName(payLoadType));
+            var payLoad = context.deserialize(obj.get("payLoad"), Class.forName(payLoadType.toString()));
             return new Message(correlationId, payLoad);
         } catch (ClassNotFoundException e) {
             // you might want to deal with this exception
