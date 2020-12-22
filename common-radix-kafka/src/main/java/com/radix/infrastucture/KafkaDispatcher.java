@@ -1,6 +1,8 @@
 package com.radix.infrastucture;
 
 import lombok.extern.java.Log;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Component;
 
@@ -10,11 +12,8 @@ import java.util.Objects;
 @Component
 public class KafkaDispatcher<T> {
 
-    private final KafkaTemplate<String, Message<T>> kafkaTemplate;
-
-    public KafkaDispatcher(KafkaTemplate<String, Message<T>> kafkaTemplate) {
-        this.kafkaTemplate = kafkaTemplate;
-    }
+	@Autowired
+    private KafkaTemplate<String, Message<T>> kafkaTemplate;
 
     public void send(String topic, String key, CorrelationId correlationId, T payLoad) {
 

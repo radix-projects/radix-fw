@@ -1,6 +1,9 @@
 package com.radix.infrastucture.config.consumer;
 
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.springframework.beans.factory.annotation.Value;
@@ -12,26 +15,18 @@ import org.springframework.kafka.core.ConsumerFactory;
 import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.listener.ConcurrentMessageListenerContainer;
-import org.springframework.messaging.Message;
 
-import java.util.HashMap;
-import java.util.Map;
+import com.radix.infrastucture.Message;
 
 
 @Configuration
 public class KafkaConsumerConfig<T> {
-
-    private final KafkaTemplate<String, Message<T>> kafkatemplate;
 
     @Value("${config.kafka.bootstrap-servers}")
     private String bootstrapServers;
 
     @Value("${config.kafka.group-id}")
     private String groupID;
-
-    public KafkaConsumerConfig(KafkaTemplate<String, Message<T>> kafkatemplate) {
-        this.kafkatemplate = kafkatemplate;
-    }
 
     @Bean
     public Map<String, Object> consumerConfigs() {
@@ -40,7 +35,6 @@ public class KafkaConsumerConfig<T> {
         props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
         props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, GsonDeserializer.class.getName());
         props.put(ConsumerConfig.GROUP_ID_CONFIG, groupID);
-        //props.put(ConsumerConfig.CLIENT_ID_CONFIG, UUID.randomUUID().toString());
         props.put(ConsumerConfig.MAX_POLL_RECORDS_CONFIG, "1");
         props.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest"); // earliest - latest
         return props;
@@ -52,10 +46,10 @@ public class KafkaConsumerConfig<T> {
     }
 
     @Bean
-    public KafkaListenerContainerFactory<ConcurrentMessageListenerContainer<String, Message<T>>> kafkaListenerContainerFactory() {
+    public KafkaListenerContainerFactory<ConcurrentMessageListenerContainer<String, Message<T>>> kafkaListenerContainerFactory(KafkaTemplate<String, Message<T>> kafkatemplate) {
         ConcurrentKafkaListenerContainerFactory<String, Message<T>> factory = new ConcurrentKafkaListenerContainerFactory<>();
         factory.setConsumerFactory(consumerFactory());
-        factory.setReplyTemplate(this.kafkatemplate);
+        factory.setReplyTemplate(kafkatemplate);
         return factory;
     }
 
