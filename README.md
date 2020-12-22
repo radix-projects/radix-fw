@@ -117,6 +117,14 @@ Habilite em seu projeto @EnableMongoRepositories passando no basePackages como p
         }
    }
 ```
+
+Incluir em sua aplicação.
+
+```properties
+spring.data.mongodb.uri=mongodb://usuario:senha@localhost:27017/nomebanco?AuthMechanism=SCRAM-SHA-256&authSource=admin
+spring.data.mongodb.database=nomebanco
+```
+
 Crie o seu entity neste diretorio "com.radix.infrastructure.persistence.mongo.myentity".
 
 ```java
