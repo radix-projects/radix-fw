@@ -12,7 +12,8 @@ import org.springframework.kafka.core.ConsumerFactory;
 import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.listener.ConcurrentMessageListenerContainer;
-import org.springframework.messaging.Message;
+
+import com.radix.infrastucture.Message;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -40,7 +41,6 @@ public class KafkaConsumerConfig<T> {
         props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
         props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, GsonDeserializer.class.getName());
         props.put(ConsumerConfig.GROUP_ID_CONFIG, groupID);
-        //props.put(ConsumerConfig.CLIENT_ID_CONFIG, UUID.randomUUID().toString());
         props.put(ConsumerConfig.MAX_POLL_RECORDS_CONFIG, "1");
         props.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest"); // earliest - latest
         return props;

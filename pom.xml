@@ -20,6 +20,7 @@
 	<modules>
 		<module>common-radix-kafka</module>
 		<module>common-radix-new-relic</module>
+		<module>common-radix-rabbit</module>
 	</modules>
 
 	<properties>
@@ -40,6 +41,11 @@
 			<dependency>
 				<groupId>br.com.radixeng</groupId>
 				<artifactId>common-radix-new-relic</artifactId>
+			</dependency>
+			
+			<dependency>
+				<groupId>br.com.radixeng</groupId>
+				<artifactId>common-radix-rabbit</artifactId>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
