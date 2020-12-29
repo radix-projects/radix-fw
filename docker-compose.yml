@@ -41,3 +41,9 @@ services:
       - network-net
     ports:
       - 1521:1521
+  redis:
+    image: redis
+    networks:
+      - network-net
+    ports:
+      - 6379:6379

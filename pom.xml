@@ -22,6 +22,7 @@
         <module>common-radix-mail</module>
 		<module>common-radix-mongodb</module>
 		<module>common-radix-oracle</module>
+		<module>common-radix-redis</module>
 	</modules>
 
 	<properties>
@@ -51,7 +52,10 @@
 				<groupId>com.radix</groupId>
 				<artifactId>common-radix-oracle</artifactId>
 			</dependency>
-
+			<dependency>
+				<groupId>com.radix</groupId>
+				<artifactId>common-radix-redis</artifactId>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 
