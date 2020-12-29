@@ -35,4 +35,9 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: MongoDB2021!
     ports:
       - "27017:27017"
-    
+  oracle:
+    image: store/oracle/database-enterprise:12.2.0.1-slim
+    networks:
+      - network-net
+    ports:
+      - 1521:1521

@@ -21,6 +21,7 @@
 		<module>common-radix-kafka</module>
         <module>common-radix-mail</module>
 		<module>common-radix-mongodb</module>
+		<module>common-radix-oracle</module>
 	</modules>
 
 	<properties>
@@ -46,6 +47,11 @@
 				<groupId>com.radix</groupId>
 				<artifactId>common-radix-mongodb</artifactId>
 			</dependency>
+			<dependency>
+				<groupId>com.radix</groupId>
+				<artifactId>common-radix-oracle</artifactId>
+			</dependency>
+
 		</dependencies>
 	</dependencyManagement>
 
@@ -53,6 +59,10 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-validation</artifactId>
 		</dependency>
 
 		<dependency>
@@ -81,28 +91,5 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
-
-	<build>
-		<pluginManagement>
-			<plugins>
-				<plugin>
-					<groupId>com.mysema.maven</groupId>
-					<artifactId>apt-maven-plugin</artifactId>
-					<version>${mysema.maven.version}</version>
-					<executions>
-						<execution>
-							<goals>
-								<goal>process</goal>
-							</goals>
-							<configuration>
-								<outputDirectory>target/generated-sources/java</outputDirectory>
-								<processor>org.springframework.data.mongodb.repository.support.MongoAnnotationProcessor</processor>
-							</configuration>
-						</execution>
-					</executions>
-				</plugin>
-			</plugins>
-		</pluginManagement>
-	</build>
 
 </project>
