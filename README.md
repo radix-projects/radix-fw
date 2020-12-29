@@ -104,6 +104,7 @@ Em seguidda usar a notacao @KafkaListener passando o topico.
 
 * [Para mais detalhes segue documentação](https://spring.io/projects/spring-kafka)
 
+---
 ### MongoDB
 O modulo MongoDb tem como objetivo abstrair feature do spring-boot-starter-data-mongodb e facilitar o uso.
 Habilite em seu projeto @EnableMongoRepositories passando no basePackages como padrao "com.radix.infrastructure.persistence.mongo".
@@ -191,4 +192,86 @@ Suba o servidor do mongodb, no diretorio radix-fw/docker-compose.yml adicionamos
 ```
 
 * [Para mais detalhes segue documentação](https://spring.io/projects/spring-data-mongodb)
-* [Segue documentação sobre QueryDsl](http://www.querydsl.com/) 
+* [Segue documentação sobre QueryDsl](http://www.querydsl.com/static/querydsl/4.4.0/reference/html_single/#mongodb_integration) 
+
+---
+### Oracle
+O modulo Oracle tem como objetivo abstrair feature do spring-boot-starter-data-jpa e facilitar o uso.
+
+Incluir em sua aplicação.
+
+```properties
+# Oracle settings
+spring.oracle.datasource.url=jdbc:oracle:thin:@localhost:1521:ORCLCDB
+spring.oracle.datasource.username=sys as sysdba
+spring.oracle.datasource.password=Oradoc_db1
+spring.oracle.datasource.driver-class-name=oracle.jdbc.driver.OracleDriver
+
+# Jpa settings - opcional
+spring.jpa.hibernate.format_sql=true
+spring.jpa.show-sql=true
+```
+
+Crie seu repository no pacote especificado "com.radix.infrastructure.persistence".
+
+```java 
+package com.radix.infrastructure.persistence.company;
+
+// imports...
+
+public interface CompanyRepository extends JpaRepository<CompanyEntity, Long>, CompanyRepositoryQueryDsl {
+
+    Optional<CompanyEntity> findByName(String name);
+    Optional<CompanyEntity> findByIdAndName(Long id, String name);
+}
+```
+
+Exemplo de herança múltipla usando queryDsl.
+
+```java 
+public interface CompanyRepository extends JpaRepository<CompanyEntity, Long>, CompanyRepositoryQueryDsl
+```
+
+Crie interface CompanyRepositoryQueryDsl exemplo.
+
+```java 
+package com.radix.infrastructure.persistence.company.querydsl;
+
+// imports...
+
+public interface CompanyRepositoryQueryDsl {
+    Optional<CompanyEntity> queryFindByIdAndName(Long id, String name);
+}
+```
+
+Em seguida implemente CompanyRepositoryQueryDsl. 
+
+```java 
+package com.radix.infrastructure.persistence.company.querydsl;
+
+// imports...
+
+public class CompanyRepositoryQueryDslImpl implements CompanyRepositoryQueryDsl {
+
+    @PersistenceContext
+    private EntityManager entityManager;
+
+    @Override
+    public Optional<CompanyEntity> queryFindByIdAndName(Long id, String name) {
+        Optional<CompanyEntity> companyOptional = Optional.empty();
+
+        if (Objects.nonNull(id) && StringUtils.isNotBlank(name)) {
+
+           QCompanyEntity qCompany = QCompanyEntity.companyEntity;
+            JPAQuery query = (JPAQuery) new JPAQuery(entityManager)
+                                            .from(qCompany)
+                                            .where(qCompany.id.eq(id)
+                                            .and(qCompany.name.containsIgnoreCase(name)));
+            companyOptional = Optional.ofNullable((CompanyEntity) query.fetchOne());
+        }
+
+        return  companyOptional;
+    }
+```
+
+* [Segue documentação sobre QueryDsl](http://www.querydsl.com/static/querydsl/4.4.0/reference/html_single/#jpa_integration) 

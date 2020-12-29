@@ -21,7 +21,6 @@ import java.util.Map;
 @Configuration
 @EnableConfigurationProperties(CacheConfigurationProperties.class)
 @Log
-@EnableCaching
 public class RedisConfig extends CachingConfigurerSupport {
 
     private static RedisCacheConfiguration createCacheConfiguration(long timeoutInSeconds) {
