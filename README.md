@@ -274,4 +274,5 @@ public class CompanyRepositoryQueryDslImpl implements CompanyRepositoryQueryDsl 
     }
 ```
 
+* [Para mais detalhes segue documentação](https://spring.io/projects/spring-data-redis)
 * [Segue documentação sobre QueryDsl](http://www.querydsl.com/static/querydsl/4.4.0/reference/html_single/#jpa_integration) 
