@@ -45,3 +45,17 @@ services:
     ports:
       - "5672:5672"
       - "15672:15672"
+
+  oracle:
+    image: store/oracle/database-enterprise:12.2.0.1-slim
+    networks:
+      - network-net
+    ports:
+      - 1521:1521
+      
+  redis:
+    image: redis
+    networks:
+      - network-net
+    ports:
+      - 6379:6379
