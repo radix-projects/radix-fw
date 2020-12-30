@@ -13,6 +13,7 @@ services:
       - '2181:2181'
     environment:
       - ALLOW_ANONYMOUS_LOGIN=yes
+
   kafka-server:
     image: 'bitnami/kafka:latest'
     networks:
@@ -35,4 +36,12 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: MongoDB2021!
     ports:
       - "27017:27017"
+    volumes:
+      - ./volumes-docker/kafka/data:/var/lib/kafka/data
     
+  rabbitMQ:
+    image: rabbitmq:management
+    container_name: rabbit
+    ports:
+      - "5672:5672"
+      - "15672:15672"

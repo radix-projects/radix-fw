@@ -5,10 +5,10 @@ import com.google.gson.*;
 
 import java.lang.reflect.Type;
 
-public class MessageAdapater implements JsonSerializer<Message>, JsonDeserializer<Message> {
+public class MessageAdapater implements JsonSerializer<Message<?>>, JsonDeserializer<Message<?>> {
 
    @Override
-   public JsonElement serialize(Message message, Type type, JsonSerializationContext context) {
+   public JsonElement serialize(Message<?> message, Type type, JsonSerializationContext context) {
         JsonObject obj = new JsonObject();
 
         obj.addProperty("type", message.getPayLoad().getClass().getName());
@@ -19,7 +19,7 @@ public class MessageAdapater implements JsonSerializer<Message>, JsonDeserialize
    }
 
     @Override
-    public Message deserialize(JsonElement jsonElement, Type type, JsonDeserializationContext context) throws JsonParseException {
+    public Message<?> deserialize(JsonElement jsonElement, Type type, JsonDeserializationContext context) throws JsonParseException {
 
         var obj = jsonElement.getAsJsonObject();
         var payLoadType = obj.get("type").getAsString();
@@ -28,7 +28,7 @@ public class MessageAdapater implements JsonSerializer<Message>, JsonDeserialize
         try {
             // maybe you want to use a "accept list"
             var payLoad = context.deserialize(obj.get("payLoad"), Class.forName(payLoadType.toString()));
-            return new Message(correlationId, payLoad);
+            return new Message<>(correlationId, payLoad);
         } catch (ClassNotFoundException e) {
             // you might want to deal with this exception
             throw new JsonParseException(e);
