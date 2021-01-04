@@ -1,9 +1,7 @@
 package com.radix.infrastructure.messaging.kafka.config.consumer;
 
 
-import java.util.HashMap;
-import java.util.Map;
-
+import com.radix.infrastructure.messaging.kafka.Message;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.springframework.beans.factory.annotation.Value;
@@ -16,7 +14,8 @@ import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.listener.ConcurrentMessageListenerContainer;
 
-import com.radix.infrastucture.Message;
+import java.util.HashMap;
+import java.util.Map;
 
 
 @Configuration

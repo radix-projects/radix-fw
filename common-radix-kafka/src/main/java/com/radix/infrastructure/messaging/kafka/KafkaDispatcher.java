@@ -5,7 +5,10 @@ import lombok.extern.java.Log;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.kafka.support.SendResult;
 import org.springframework.stereotype.Component;
+import org.springframework.util.concurrent.ListenableFuture;
+import org.springframework.util.concurrent.ListenableFutureCallback;
 
 import java.util.Objects;
 
@@ -13,7 +16,7 @@ import java.util.Objects;
 @Component
 public class KafkaDispatcher<T> {
 
-	@Autowired
+    @Autowired
     private KafkaTemplate<String, Message<T>> kafkaTemplate;
 
     public void send(String topic, String key, CorrelationId correlationId, T payLoad) {
@@ -27,11 +30,11 @@ public class KafkaDispatcher<T> {
         log.info(String.format("Sending : %s", message));
         log.info("--------------------------------");
 
-        ListenableFuture<SendResult<String, String>> future = kafkaTemplate.send(topic, key, message);
-        future.addCallback(new ListenableFutureCallback<SendResult<String, String>>() {
-    
+        var future = kafkaTemplate.send(topic, key, message);
+
+        future.addCallback(new ListenableFutureCallback<>() {
             @Override
-            public void onSuccess(SendResult<String, String> result) {
+            public void onSuccess(SendResult<String, Message<T>> result) {
                 log.info("Sent message=[" + message + "] with offset=[" + result.getRecordMetadata().offset() + "]");
                 kafkaTemplate.flush();
             }
@@ -44,3 +47,5 @@ public class KafkaDispatcher<T> {
     }
 
 }
+
+
