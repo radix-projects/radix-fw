@@ -7,6 +7,9 @@ import com.radix.infrastructure.messaging.kafka.MessageAdapater;
 
 import org.springframework.core.serializer.Deserializer;
 
+import java.io.IOException;
+import java.io.InputStream;
+
 public class GsonDeserializer<T> implements Deserializer<Message<T>> {
 
     private final Gson gson =  new GsonBuilder().registerTypeAdapter(Message.class, new MessageAdapater()).create();
