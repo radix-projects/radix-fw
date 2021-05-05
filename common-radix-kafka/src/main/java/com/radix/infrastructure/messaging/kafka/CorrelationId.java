@@ -1,10 +1,12 @@
 package com.radix.infrastructure.messaging.kafka;
 
+import lombok.Getter;
+import lombok.ToString;
+
 import java.util.UUID;
 
-import lombok.Getter;
-
 @Getter
+@ToString
 public class CorrelationId {
 
     private final String id;
